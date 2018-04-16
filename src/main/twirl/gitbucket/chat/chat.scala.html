@@ -1,0 +1,68 @@
+@(repository: gitbucket.core.service.RepositoryService.RepositoryInfo)(implicit context: gitbucket.core.controller.Context)
+@import gitbucket.core.view.helpers._
+@gitbucket.core.html.main("Chat", Some(repository)) {
+  @gitbucket.core.html.menu("chat", repository) {
+    <script src="@context.path/plugin-assets/chat/atmosphere.js"></script>
+    <script>
+      var me = "@context.loginAccount.get.userName";
+    </script>
+    <style type="text/css">
+    <!--
+      .chat {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        margin-bottom: 10px;
+      }
+      .chat-avatar {
+        float: left;
+        margin-right: -50px;
+      }
+      .chat-avatar img {
+        width: 30px;
+        height: 30px;
+      }
+      .chat-area {
+        width: 100%;
+        float: right;
+      }
+      .chat-message {
+        display: inline-block;
+        padding: 15px 20px;
+        margin-left: 50px;
+        margin-top: 10px;
+        border-radius: 10px;
+        position: relative;
+        background-color: #ffe;
+      }
+      .chat-message:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        margin-top: -10px;
+        display: block;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #ffe transparent transparent;
+      }
+    -->
+    </style>
+    <script id="message-template" type="text/html">
+      <div class="chat">
+        <div class="chat-avatar">
+          <img src="@context.path/{{author}}/_avatar">
+        </div>
+        <div class="chat-area">
+          <div class="chat-message">{{message}}<span class="chat-time"> time:{{time}}</span></div>
+        </div>
+      </div>
+    </script>
+    <div id="chat-container">
+    </div>
+    <input type="text" id="inputMessage">
+    <script src="@context.path/plugin-assets/chat/chat.js"></script>
+  }
+}
